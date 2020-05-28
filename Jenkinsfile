@@ -27,9 +27,11 @@ pipeline {
             }
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker_hub') {
-                        app.push("${env.BUILD_NUMBER}")
-                        app.push("latest")
+                    docker.withRegistry('https://hub.docker.com/repository/docker/marius55/fms', 'docker_hub') {
+                        sh "docker tag willbla/train-schedule:$BUILD_NUMBER marius55/fms:newapi_$BUILD_NUMBER"
+                            docker.image("marius55/fms:newapi_$BUILD_NUMBER").push()
+                        
+                        
                     }
                 }
             }
