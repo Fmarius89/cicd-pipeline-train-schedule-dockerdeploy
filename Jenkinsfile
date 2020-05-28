@@ -27,7 +27,7 @@ pipeline {
             }
             steps {
                 script {
-                    docker.withRegistry('https://hub.docker.com/repository/docker/marius55/fms', 'docker_hub') {
+                    docker.withRegistry('https://hub.docker.com/', 'docker_hub') {
                         sh "docker tag willbla/train-schedule:$BUILD_NUMBER marius55/fms:newapi:latest"
                             docker.image("marius55/fms:newapi:latest").push()
                         
